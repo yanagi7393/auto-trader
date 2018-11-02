@@ -66,4 +66,4 @@ Basically, 60sec(1min) candle is made and saved every 10 seconds (0 to 60, 10 to
 #
 * **Auto Trading**
   1. For auto trading, you should to determine the trading conditions such as threshold which you can get through back testing.
-  2. If the conditions are set, now you can do auto trading! (Auto trading will be performed every 10 seconds intervals)
+  2. If the conditions are set, now you can do real-time auto trading! (Auto trading will be performed every 10 seconds intervals)
