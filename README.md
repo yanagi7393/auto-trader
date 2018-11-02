@@ -51,9 +51,9 @@ Training & Trading step
 * **Collecting ticker data is performed in the following order.**  
 Basically, 60sec(1min) candle is made and saved every 10 seconds (0 to 60, 10 to 70, 20 to 80, ..., 50 to 110 sec) from ticker data. In other words, if you collect data for one minute, you have six 1minute candles with 10 second intervals.
 
-  1. First, if you run the code, last 6000 ticker data will be automatically downloaded from Cryptowatch. 2. Second, afterwards, it will automatically shift to download real-time ticker data from Bainance.
-  
-  2. If you re-execute the code, it will download the ticker data from time of code stopped until the current time by the Cryptowatch, and then, it will automatically shift to download real-time ticker data from Bainance.
+  1. First, if you run the code, last 6000 ticker data will be automatically downloaded from Cryptowatch.
+  2. Second, afterwards, it will automatically shift to download real-time ticker data from Bainance.
+  3. If you re-execute the code, it will download the ticker data from time of code stopped until the current time by the Cryptowatch, and then, it will automatically shift to download real-time ticker data from Bainance.
 #
 * **Training main model**
   1. First, you should to make dataset. For making dataset, you need to make concatenated csv file using collected ticker data.
