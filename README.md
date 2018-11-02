@@ -26,7 +26,7 @@ CNN_(Ar)BiLSTM_DDDQN model
 
 	1. From the collected ticker data, calculate the technical indicator and use it as an input this will be used as states.
 	2. Agent contacts the environment, returning states (indicator values of 60 periods from past to present), action, and reward. Also returns the history of [Now have money/Total money Ratio, Action, Action Percentage] for meta learning.
-	3. Input Calculated 64 indicators for each point (× item counts, × 60 sequence batch) to CNN.
+	3. Input Calculated 64 indicators for each point (× item counts, × 60 sequence batch) to CNN(DenseNet without Dropout).
 	4. input concatenate[CNN feature[0:59] + history vector(for meta learning)] into BiLSTM1 and BiLSTM2.
 	5. BiLSTM1 is the route for the action-value. BiLSTM2 is the route for the price prediction & the action-value.
 	   (BiDRw QN model's BiLSTM2 predict price directly)  
