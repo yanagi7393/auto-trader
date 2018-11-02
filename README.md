@@ -39,7 +39,7 @@ CNN_(Ar)BiLSTM_DDDQN model
 	  2. BiLSTM2->output feature->FC->predict price <-> price label (MSE) loss.
 	  3. (BiDRx QN model only) CNN feature[0:58]->BiLSTM2->output feature <-> CNN feature[59] (MSE, Cross-entropy) loss. #approximate vector's value and distribution.
 
-* **After the training, ACTION = input[0:59]->CNN feature[0:59]->BiLSTM1, BiLSTM2->concat[output1, output2]->Action-Value Q-> Action which is argmax(Q)**
+* **After the training, ACTION = input[0:59]->CNN feature[0:59]->BiLSTM1, BiLSTM2->concat[output1, output2]->Action-Value Q-> Action which is argmax(Q)**  
 ![model_2](/model_2.png)
 
 Training & Trading step
