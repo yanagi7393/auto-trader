@@ -1,5 +1,7 @@
-Auto_trading (Here are 2 models)
+Auto trading
 ========================
+**Auto trading is a model that uses deep learning techniques to automatically trade stocks or cryptocurrency. Auto trading include 2 models that prediction-based and action-based models. After the training the model, for trading, here I attach a real-time price collector code and an auto-trader code on the 'Bainance' exchange.**
+
 AE_CNN_ArLSTM model
 ------------------------
 #### 0_AE_CNN_ArLSTM_model is AutoEncoder-Convolutional NN-AutoRegression LSTM model. This model is based on predicting next price (1min later, 5min later or your setting).
