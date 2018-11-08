@@ -32,7 +32,7 @@ if save_continue == True:
         set_from_start_here = 1
         
 if set_from_start_here == 1:
-    set_time_point = str(int(time.time()) - 10000) #server's saved price length -> 6000 (server time != PC, so set 10000// 6000 < 10000)
+    set_time_point = str(int(time.time()) - 1000000) #server's saved price length -> 6000*100 (server time != PC, but set 1000000, 600000 < 1000000)
 else:
     calc_min_time = min(int(os.path.getctime('./xrpusdt/5_chart/'+str(set_from_start_here-1)+'.csv')), int(os.path.getmtime('./xrpusdt/5_chart/'+str(set_from_start_here-1)+'.csv')))
     set_time_point = str(calc_min_time + 60)
