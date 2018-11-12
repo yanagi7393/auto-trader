@@ -22,9 +22,9 @@ def Batch_Normalization(x, training, S_batch_norm, scope):
         elif S_batch_norm == 'off':
             return x
 
-def conv_layer(input, filter, kernel, stride=1, layer_name="conv"):
+def conv_layer(input, filter, kernel, stride=1, use_bias=False, padding='SAME',layer_name="conv"):
     with tf.name_scope(layer_name):
-        network = tf.layers.conv2d(inputs=input, use_bias=False, filters=filter, kernel_size=kernel, strides=stride, padding='SAME')
+        network = tf.layers.conv2d(inputs=input, use_bias=use_bias, filters=filter, kernel_size=kernel, strides=stride, padding=padding)
         
         return network
 
@@ -73,8 +73,7 @@ class DenseNet(object):
         with tf.name_scope(scope):
             x = Batch_Normalization(x, self.training, self.S_batch_norm, scope=scope+'_batch1')
             x = Relu(x)
-            x = conv_layer(x, filter=self.filters, kernel=[1,1], layer_name=scope+'_conv1')
-            x = Average_pooling(x, pool_size=[2,2], stride=2)
+            x = conv_layer(x, filter=self.filters, kernel=[4,4], stride=2, layer_name=scope+'_conv1')
 
             return x
 
@@ -97,21 +96,16 @@ class DenseNet(object):
 
     def Dense_net(self, input_x, scope):
         with tf.name_scope(scope):
-            x = conv_layer(input_x, filter=self.filters, kernel=[3,3], stride=1, layer_name=scope+'conv0')
+            x = conv_layer(input_x, filter=self.filters*2, kernel=[3,3], stride=1, layer_name=scope+'conv0') #[8,8]
 
-            x = self.dense_block(input_x=x, nb_layers=6, layer_name=scope+'dense_1')
-            x = self.transition_layer(x, scope=scope+'trans_1')
+            x = self.dense_block(input_x=x, nb_layers=8, layer_name=scope+'dense_1') #[8,8]
+            x = self.transition_layer(x, scope=scope+'trans_1') #[4,4]
 
-            x = self.dense_block(input_x=x, nb_layers=6, layer_name=scope+'dense_2')
-            x = self.transition_layer(x, scope=scope+'trans_2')
-
-            x = self.dense_block(input_x=x, nb_layers=24, layer_name=scope+'dense_final')
-
+            x = self.dense_block(input_x=x, nb_layers=16, layer_name=scope+'dense_final') #[4,4]
+            
             x = Batch_Normalization(x, self.training, self.S_batch_norm, scope=scope+'linear_batch')            
             x = Relu(x)
-            x = Global_Average_Pooling(x)
-            x = flatten(x)
-            x = Linear(x, self.output_size, scope)
+            x = conv_layer(x, filter=self.output_size, kernel=[4,4], stride=1, use_bias=True, padding='VALID', layer_name=scope+'conv_final')
+            x = tf.squeeze(x)
 
             return x
-
